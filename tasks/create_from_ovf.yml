@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Created [ {{ item }} ] VM from Template"
+  - name: "Created [ {{ item }} ] VM from OVF Template"
     vmware_deploy_ovf:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'

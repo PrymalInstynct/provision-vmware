@@ -1,20 +1,17 @@
 ---
 - block:
 
-  - name: "Created [ {{ item }} ] VM from Template"
-    vmware_deploy_ovf:
+  - name: "Create [ {{ item }} ] VM with Template`"
+    vmware_guest:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      ovf: /etc/ansible/roles/provision-vmware/files/rhel7/efi-rhel7-nogui.ovf
       datacenter: ha-datacenter
-      folder: /ha-datacenter/vm
-      disk_provisioning: thin
-      datastore: datastore1
-      networks:
-        'Server-LAN-10.10.10.0/24': 'Server-LAN-10.10.10.0/24'
+      folder: vm
+      state: poweredon
+      template: '{{ vmware_template }}'
       wait_for_ip_address: yes
     register: deploy
 
