@@ -16,7 +16,7 @@ Role Variables
 --------------
 
 | Variable | Default | Description |
-------------------------------------
+|----------|---------|-------------|
 | `vmware_name` | 10.10.1.20 | vCenter or ESXi IP Address or Hostname |
 | `vmware_user` | root | User with rights to VMWare Assests |
 | `vmware_pass` | `vault_vmware_pass` | Set password for VMWare user in group_vars/all/vault.yml |
@@ -25,7 +25,7 @@ Tags
 ----
 
 | Tags | Description |
-----------------------
+|------|-------------|
 | `create_new` | Create a New VM with an ISO mounted |
 | `create_from_template` | Create a New VM from an OFV Template found in files/* |
 | `delete` | Delete a VM along with cleaning up the ansible host file |
