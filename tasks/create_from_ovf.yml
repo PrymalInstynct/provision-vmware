@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Created [ {{ item }} ] VM from OVF Template"
+  - name: "Creating [ {{ item }} ] VM from OVF Template"
     vmware_deploy_ovf:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
@@ -10,7 +10,7 @@
       name: '{{ item }}'
       ovf: '{{ vmware_ovf }}'
       datacenter: '{{ vmware_datacenter }}'
-      folder: /ha-datacenter/vm
+      folder: '/{{ vmware_datacenter }}/{{ vmware_folder }}'
       disk_provisioning: thin
       datastore: '{{ vmware_datastore }}'
       networks:

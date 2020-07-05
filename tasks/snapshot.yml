@@ -7,7 +7,7 @@
       echo: yes
     register: snapshot_name
 
-  - name: "Take Snapshot of the [ {{ item }} ] VM"
+  - name: "Taking Snapshot of the [ {{ item }} ] VM"
     vmware_guest_snapshot:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'

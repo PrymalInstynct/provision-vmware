@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Create [ {{ item }} ] VM with ISO"
+  - name: "Creating [ {{ item }} ] VM with ISO"
     vmware_guest:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'

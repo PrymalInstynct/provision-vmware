@@ -18,7 +18,7 @@
       regexp: '{{ vm_info.instance.ipv4 }}'
       state: absent
 
-  - name: "Power Off the [ {{ item }} ] VM"
+  - name: "Powering Off the [ {{ item }} ] VM"
     vmware_guest:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
@@ -29,7 +29,7 @@
       folder: '{{ vmware_folder }}'
       state: poweredoff
 
-  - name: "Delete the [ {{ item }} ] VM"
+  - name: "Deleteing the [ {{ item }} ] VM"
     vmware_guest:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'

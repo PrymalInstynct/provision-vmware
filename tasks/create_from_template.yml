@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Create [ {{ item }} ] VM with Template`"
+  - name: "Creating [ {{ item }} ] VM with Template`"
     vmware_guest:
       hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
