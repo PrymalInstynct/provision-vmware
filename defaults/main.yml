@@ -1,5 +1,10 @@
 ---
 # defaults file for provision-vmware
-vmware_name: 10.10.1.20
+vmware_host: 10.10.1.20
 vmware_user: root
 vmware_pass: '{{ vault_vmware_pass }}'
+vmware_template: efi-rhel7-nogui
+vmware_datacenter: ha-datacenter
+vmware_ovf: /etc/ansible/roles/provision-vmware/files/rhel7/efi-rhel7-nogui.ovf
+vmware_folder: vm
+vmware_datastore: datastore1

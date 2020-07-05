@@ -3,13 +3,13 @@
 
   - name: "Gather [ {{ item }} ] Info"
     vmware_guest_info:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
     register: vm_info
 
   - name: "Clean Ansible Hosts File of [ {{ item }} ] IP Address"
@@ -20,24 +20,24 @@
 
   - name: "Power Off the [ {{ item }} ] VM"
     vmware_guest:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
       state: poweredoff
 
   - name: "Delete the [ {{ item }} ] VM"
     vmware_guest:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
       state: absent
 
   delegate_to: localhost

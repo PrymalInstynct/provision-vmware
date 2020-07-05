@@ -3,19 +3,19 @@
 
   - name: "Create [ {{ item }} ] VM with ISO"
     vmware_guest:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
       state: poweredon
       guest_id: rhel7_64Guest
       disk:
       - size_gb: 100
         type: thin
-        datastore: datastore1
+        datastore: '{{ vmware_datastore }}'
       networks:
       - name: 'Server-LAN-10.10.10.0/24'
         device_type: vmxnet3

@@ -9,13 +9,13 @@
 
   - name: "Take Snapshot of the [ {{ item }} ] VM"
     vmware_guest_snapshot:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
       snapshot_name: '{{ snapshot_name.user_input }}'
 
   delegate_to: localhost

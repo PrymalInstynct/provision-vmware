@@ -3,13 +3,13 @@
 
   - name: "Create [ {{ item }} ] VM with Template`"
     vmware_guest:
-      hostname: '{{ vmware_name }}'
+      hostname: '{{ vmware_host }}'
       username: '{{ vmware_user }}'
       password: '{{ vmware_pass }}'
       validate_certs: False
       name: '{{ item }}'
-      datacenter: ha-datacenter
-      folder: vm
+      datacenter: '{{ vmware_datacenter }}'
+      folder: '{{ vmware_folder }}'
       state: poweredon
       template: '{{ vmware_template }}'
       wait_for_ip_address: yes
