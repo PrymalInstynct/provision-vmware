@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Created VM from Template"
+  - name: "Created {{ item }} VM from Template"
     vmware_deploy_ovf:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'
@@ -18,7 +18,7 @@
       wait_for_ip_address: yes
     register: deploy
 
-  - name: "Update ansible hosts file with VM IP address"
+  - name: "Update Ansible hosts file with {{ item }} IP address"
     lineinfile:
       path: /etc/ansible/hosts
       insertafter: ^[test_group]
