@@ -1,0 +1,28 @@
+---
+- block:
+
+  - name: "Created VM from Template"
+    vmware_deploy_ovf:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      ovf: /etc/ansible/roles/provision-vmware/files/rhel7/efi-rhel7-nogui.ovf
+      datacenter: ha-datacenter
+      folder: /ha-datacenter/vm
+      disk_provisioning: thin
+      datastore: datastore1
+      networks:
+        'Server-LAN-10.10.10.0/24': 'Server-LAN-10.10.10.0/24'
+      wait_for_ip_address: yes
+    register: deploy
+
+  - name: "Update ansible hosts file with VM IP address"
+    lineinfile:
+      path: /etc/ansible/hosts
+      insertafter: ^[test_group]
+      line: "{{ deploy.instance.ipv4 }}"
+
+  delegate_to: localhost
+  tags: create_from_template

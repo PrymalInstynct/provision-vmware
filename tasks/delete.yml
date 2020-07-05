@@ -1,0 +1,44 @@
+---
+- block:
+
+  - name: Gather VM Info
+    vmware_guest_info:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      datacenter: ha-datacenter
+      folder: vm
+    register: vm_info
+
+  - name: "Clean Host File"
+    lineinfile:
+      path: /etc/ansible/hosts
+      regexp: '{{ vm_info.instance.ipv4 }}'
+      state: absent
+
+  - name: "Power Off the VM"
+    vmware_guest:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      datacenter: ha-datacenter
+      folder: vm
+      state: poweredoff
+
+  - name: "Delete the VM"
+    vmware_guest:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      datacenter: ha-datacenter
+      folder: vm
+      state: absent
+
+  delegate_to: localhost
+  tags: delete

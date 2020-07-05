@@ -1,0 +1,39 @@
+---
+- block:
+
+  - name: "Create VM with ISO"
+    vmware_guest:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      datacenter: ha-datacenter
+      folder: vm
+      state: poweredon
+      guest_id: rhel7_64Guest
+      disk:
+      - size_gb: 100
+        type: thin
+        datastore: datastore1
+      networks:
+      - name: 'Server-LAN-10.10.10.0/24'
+        device_type: vmxnet3
+      hardware:
+         memory_mb: 2048
+         num_cpus: 2
+         scsi: paravirtual
+      cdrom:
+         type: "iso"
+         iso_path: "[datastore1] ISOs/rhel-server-7.7-x86_64-dvd.iso"
+      wait_for_ip_address: yes
+    register: deploy
+
+  - name: "Update ansible hosts file with VM IP address"
+    lineinfile:
+      path: /etc/ansible/hosts
+      insertafter: ^[test_group]
+      line: "{{ deploy.instance.ipv4 }}"
+
+  delegate_to: localhost
+  tags: create_new

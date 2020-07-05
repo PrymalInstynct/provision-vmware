@@ -1,0 +1,22 @@
+---
+- block:
+
+  - name: Prompt for Snapshot Description
+    pause:
+      prompt: What Description would you like for the snapshot?
+      echo: yes
+    register: snapshot_name
+
+  - name: "Take Snapshot of the VM"
+    vmware_guest_snapshot:
+      hostname: '{{ vmware_name }}'
+      username: '{{ vmware_user }}'
+      password: '{{ vmware_pass }}'
+      validate_certs: False
+      name: '{{ item }}'
+      datacenter: ha-datacenter
+      folder: vm
+      snapshot_name: '{{ snapshot_name.user_input }}'
+
+  delegate_to: localhost
+  tags: snapshot
