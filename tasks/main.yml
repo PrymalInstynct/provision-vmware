@@ -3,6 +3,10 @@
   loop: '{{ guest_name }}'
   tags: create_new
 
+- include_tasks: create_from_ovf.yml
+  loop: '{{ guest_name }}'
+  tags: create_from_ovf
+
 - include_tasks: create_from_template.yml
   loop: '{{ guest_name }}'
   tags: create_from_template

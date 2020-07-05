@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Gather {{ item }} Info"
+  - name: "Gather [ {{ item }} ] Info"
     vmware_guest_info:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'
@@ -12,13 +12,13 @@
       folder: vm
     register: vm_info
 
-  - name: "Clean Ansible Hosts File of {{ item }} IP Address"
+  - name: "Clean Ansible Hosts File of [ {{ item }} ] IP Address"
     lineinfile:
       path: /etc/ansible/hosts
       regexp: '{{ vm_info.instance.ipv4 }}'
       state: absent
 
-  - name: "Power Off the {{ item }} VM"
+  - name: "Power Off the [ {{ item }} ] VM"
     vmware_guest:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'
@@ -29,7 +29,7 @@
       folder: vm
       state: poweredoff
 
-  - name: "Delete the {{ item }} VM"
+  - name: "Delete the [ {{ item }} ] VM"
     vmware_guest:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'

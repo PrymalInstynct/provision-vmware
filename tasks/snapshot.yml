@@ -1,13 +1,13 @@
 ---
 - block:
 
-  - name: "Prompt for {{ item }} VM Snapshot Description"
+  - name: "Prompt for [ {{ item }} ] VM Snapshot Description"
     pause:
       prompt: What Description would you like for the snapshot?
       echo: yes
     register: snapshot_name
 
-  - name: "Take Snapshot of the {{ item }} VM"
+  - name: "Take Snapshot of the [ {{ item }} ] VM"
     vmware_guest_snapshot:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'

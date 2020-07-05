@@ -25,4 +25,4 @@
       line: "{{ deploy.instance.ipv4 }}"
 
   delegate_to: localhost
-  tags: create_from_template
+  tags: create_from_ovf

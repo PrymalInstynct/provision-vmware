@@ -1,7 +1,7 @@
 ---
 - block:
 
-  - name: "Create {{ item }} VM with ISO"
+  - name: "Create [ {{ item }} ] VM with ISO"
     vmware_guest:
       hostname: '{{ vmware_name }}'
       username: '{{ vmware_user }}'
@@ -29,7 +29,7 @@
       wait_for_ip_address: yes
     register: deploy
 
-  - name: "Update Ansible hosts file with {{ item }} IP address"
+  - name: "Update Ansible hosts file with [ {{ item }} ] IP address"
     lineinfile:
       path: /etc/ansible/hosts
       insertafter: ^[test_group]
